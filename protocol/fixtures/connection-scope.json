@@ -1,0 +1,114 @@
+[
+  {
+    "mode": "pair",
+    "scope": "full",
+    "room": "room-1",
+    "tag": "pair",
+    "prologue": "000b726465762d6532652f76330004706169720006726f6f6d2d31"
+  },
+  {
+    "mode": "enroll",
+    "scope": "full",
+    "room": "room-1",
+    "tag": "enroll",
+    "prologue": "000b726465762d6532652f76330006656e726f6c6c0006726f6f6d2d31"
+  },
+  {
+    "mode": "auth",
+    "scope": "full",
+    "room": "room-1",
+    "tag": "auth",
+    "prologue": "000b726465762d6532652f76330004617574680006726f6f6d2d31"
+  },
+  {
+    "mode": "resume",
+    "scope": "full",
+    "room": "room-1",
+    "tag": "resume",
+    "prologue": "000b726465762d6532652f76330006726573756d650006726f6f6d2d31"
+  },
+  {
+    "mode": "pair",
+    "scope": "desktopOnly",
+    "room": "room-1",
+    "tag": "desktop-pair",
+    "prologue": "0013726465762d6532652f6465736b746f702f76310004706169720006726f6f6d2d31"
+  },
+  {
+    "mode": "enroll",
+    "scope": "desktopOnly",
+    "room": "room-1",
+    "tag": "desktop-enroll",
+    "prologue": "0013726465762d6532652f6465736b746f702f76310006656e726f6c6c0006726f6f6d2d31"
+  },
+  {
+    "mode": "auth",
+    "scope": "desktopOnly",
+    "room": "room-1",
+    "tag": "desktop-auth",
+    "prologue": "0013726465762d6532652f6465736b746f702f76310004617574680006726f6f6d2d31"
+  },
+  {
+    "mode": "resume",
+    "scope": "desktopOnly",
+    "room": "room-1",
+    "tag": "desktop-resume",
+    "prologue": "0013726465762d6532652f6465736b746f702f76310006726573756d650006726f6f6d2d31"
+  },
+  {
+    "mode": "pair",
+    "scope": "full",
+    "room": "机-🌬",
+    "tag": "pair",
+    "prologue": "000b726465762d6532652f76330004706169720008e69cba2df09f8cac"
+  },
+  {
+    "mode": "enroll",
+    "scope": "full",
+    "room": "机-🌬",
+    "tag": "enroll",
+    "prologue": "000b726465762d6532652f76330006656e726f6c6c0008e69cba2df09f8cac"
+  },
+  {
+    "mode": "auth",
+    "scope": "full",
+    "room": "机-🌬",
+    "tag": "auth",
+    "prologue": "000b726465762d6532652f76330004617574680008e69cba2df09f8cac"
+  },
+  {
+    "mode": "resume",
+    "scope": "full",
+    "room": "机-🌬",
+    "tag": "resume",
+    "prologue": "000b726465762d6532652f76330006726573756d650008e69cba2df09f8cac"
+  },
+  {
+    "mode": "pair",
+    "scope": "desktopOnly",
+    "room": "机-🌬",
+    "tag": "desktop-pair",
+    "prologue": "0013726465762d6532652f6465736b746f702f76310004706169720008e69cba2df09f8cac"
+  },
+  {
+    "mode": "enroll",
+    "scope": "desktopOnly",
+    "room": "机-🌬",
+    "tag": "desktop-enroll",
+    "prologue": "0013726465762d6532652f6465736b746f702f76310006656e726f6c6c0008e69cba2df09f8cac"
+  },
+  {
+    "mode": "auth",
+    "scope": "desktopOnly",
+    "room": "机-🌬",
+    "tag": "desktop-auth",
+    "prologue": "0013726465762d6532652f6465736b746f702f76310004617574680008e69cba2df09f8cac"
+  },
+  {
+    "mode": "resume",
+    "scope": "desktopOnly",
+    "room": "机-🌬",
+    "tag": "desktop-resume",
+    "prologue": "0013726465762d6532652f6465736b746f702f76310006726573756d650008e69cba2df09f8cac"
+  }
+]

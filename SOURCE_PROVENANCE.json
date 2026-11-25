@@ -1,0 +1,56 @@
+{
+  "product": "Shellkite",
+  "source": {
+    "repository": "https://github.com/xpromptvs/xpromptvs",
+    "revision": "06d6ca0c124fca7ba36542e8a51d71b5c980d207"
+  },
+  "compatibility": {
+    "base": "02b36f88ecfe51585c7bb9b629c72277307e1391",
+    "revision": "a2f2ffa7ddc8df2a8975aefc506195d1145e7007",
+    "paths": [
+      "host/RdevCore/Sources/RdevCore/ConnectionScope.swift",
+      "host/RdevCore/Sources/RdevCore/DesktopOnlyPolicy.swift",
+      "host/RdevCore/Sources/RdevCore/DesktopStateProjection.swift",
+      "host/RdevCore/Sources/RdevCore/HostConfig.swift",
+      "host/RdevCore/Sources/RdevCore/SessionState.swift",
+      "host/RdevCore/Sources/RdevCore/Signaling.swift",
+      "host/RdevCore/Sources/RdevCore/SocketClientID.swift",
+      "host/RdevCore/Tests/RdevCoreTests/ConnectionScopeTests.swift",
+      "host/RdevCore/Tests/RdevCoreTests/DesktopOnlyPolicyTests.swift",
+      "host/RdevCore/Tests/RdevCoreTests/DesktopStateProjectionTests.swift",
+      "host/RdevE2E/Sources/RdevE2E/E2EClientGate.swift",
+      "host/RdevE2E/Sources/RdevE2E/E2ESignallingGate.swift",
+      "host/RdevE2E/Tests/RdevE2ETests/E2EClientGateTests.swift",
+      "host/RdevHostKit/Sources/RdevHostKit/ChannelHub.swift",
+      "host/RdevHostKit/Sources/RdevHostKit/ClientConnection.swift",
+      "host/RdevHostKit/Sources/RdevHostKit/FastClientConnection.swift",
+      "host/RdevHostKit/Sources/RdevHostKit/HostSession.swift",
+      "host/RdevHostKit/Sources/RdevHostKit/PeerHub.swift",
+      "host/RdevHostKit/Sources/RdevHostKit/PionPeer.swift",
+      "host/RdevHostKit/Sources/RdevHostKit/SharingRoom.swift",
+      "host/RdevHostKit/Sources/RdevHostKit/SimManager.swift",
+      "host/RdevHostKit/Sources/RdevHostKit/SocketClients.swift",
+      "host/RdevHostKit/Tests/RdevHostKitTests/ChannelHubSessionTests.swift",
+      "host/RdevHostKit/Tests/RdevHostKitTests/DesktopTransportTests.swift",
+      "host/RdevHostKit/Tests/RdevHostKitTests/SimManagerSessionTests.swift",
+      "protocol/fixtures/connection-scope.json",
+      "protocol/src/connection-scope.ts",
+      "protocol/src/e2e-host-gate.ts",
+      "protocol/src/e2e-signalling-gate.ts",
+      "protocol/src/index.ts",
+      "protocol/test/desktop-handshake.test.ts",
+      "scripts/gen_connection_scope_fixture.py",
+      "web/test/shellkite-enrollment.test.ts"
+    ]
+  },
+  "gitlinks": [
+    {
+      "path": "third_party/libaom",
+      "sha": "03087864cf4bea6abb0d28f95cf7843511413d8f"
+    },
+    {
+      "path": "third_party/libopus",
+      "sha": "ddbe48383984d56acd9e1ab6a090c54ca6b735a6"
+    }
+  ]
+}

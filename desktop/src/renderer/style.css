@@ -1,0 +1,140 @@
+* { box-sizing: border-box; }
+html,body { margin: 0; height: 100%; overflow: hidden; }
+body { background: var(--app-bg); user-select: none; overflow: hidden; }
+.ss-home #home-devices button:focus-visible,
+.ss-home .ss-remote-setup summary:focus-visible { outline: none; }
+.ss-header { padding-left: 90px; -webkit-app-region: drag; }
+.ss-header :is(button,a,select) { -webkit-app-region: no-drag; }
+/* The header and dashboard pages share the native window’s flex layout. */
+#home { display: contents; }
+.share-content { padding-top: 24px; max-width: 1120px; }
+.share-content .ss-intro { margin-top: 24px; }
+.share-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 20px; align-items: start; }
+.share-card { display: flex; flex-direction: column; gap: 18px; background: var(--surface); border: 1px solid var(--border2); border-radius: 12px; padding: 24px; min-width: 0; }
+h2 { font-size: 18px; font-weight: 500; margin: 0; }
+.hint,.disclaimer,.published,.status { color: var(--muted); font-size: 14px; line-height: 1.5; margin: 0; }
+.code-row { display: flex; align-items: center; gap: 8px; }
+code { flex: 1; min-width: 0; padding: 12px; background: var(--bg); border: 1px solid var(--border2); border-radius: 7px; word-break: break-all; font: 14px/1.5 ui-monospace,Menlo,monospace; user-select: text; }
+#connect-url { font-size: 12px; }
+#qr { display: flex; justify-content: center; padding: 15px; background: white; width: fit-content; align-self: center; border-radius: 8px; }
+#qr img { display: block; width: 170px; height: 170px; }
+.perm { display: flex; gap: 10px; align-items: center; min-height: 38px; font-size: 14px; color: var(--muted); }
+.perm.missing, .published[data-tone=warn] { color: var(--warn); }
+.perm button { font-size: 12px; margin-left: auto; min-height: 32px; padding: 4px 8px; }
+/* The encryption identity row, on the home page beside Share. `data-tone` carries the DECISION
+   (`e2e-row.ts`), so no style here parses the text — the same rule `.published` follows. */
+.e2e-row { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; margin: -4px 0 18px; font-size: 14px; color: var(--muted); }
+.e2e-row[data-tone=warn] { color: var(--warn); }
+.e2e-row[data-tone=ok] { color: var(--muted); }
+.e2e-identity { flex-basis: 100%; font-family: var(--font-mono, monospace); font-size: 12px; word-break: break-all; user-select: text; color: var(--text); }
+.e2e-row button { font-size: 12px; min-height: 32px; padding: 4px 8px; }
+/* Settings → End-to-End Encryption. `data-tone` carries the DECISION (`e2eSettings`), so nothing
+   here parses the text — the same rule `.published` and `.e2e-row` follow. */
+.ss-settings-e2e h2 { font-size: 17.333px; font-weight: 500; margin: 26px 0 6px; }
+.ss-settings-e2e p { font-size: 14px; color: var(--muted); margin: 0; }
+.ss-settings-e2e[data-tone=warn] p { color: var(--warn); }
+.ss-settings-e2e .ss-settings-row { align-items: flex-start; }
+#e2e-settings-device { flex: 0 1 auto; max-width: 58%; font-size: 12px; padding: 9px 11px; }
+/* **SCOPED TO THE ROW IT WAS WRITTEN FOR.** As `.ss-home button.danger` this also hit the SHARED
+   profile alert's Sign out — this sheet loads after `shell.css`, so it won — and produced three
+   visible differences the browser never had: transparent where its Cancel was filled, 6px lower
+   than it, and 42px tall against a Cancel that STRETCHED to 48 to fill the row that margin made.
+   A surface-only rule matching a shared component by its generic class is the whole failure mode
+   `docs/ui-design.md` is about. `color` is `shell.css`'s and was never this rule's to restate. */
+.e2e-row button.danger { background: transparent; margin-top: 6px; }
+@media(max-width:800px) { .share-grid { grid-template-columns: 1fr; } }
+
+/* The adoption QR. Sized so a phone camera resolves the modules from a comfortable distance —
+   the carrier beside it stays the fallback when it will not focus. */
+.e2e-qr { display: block; width: 180px; height: 180px; margin: 8px 0; border-radius: 9px;
+          background: #fff; padding: 6px; }
+
+/* Detail pages use the same Back button and title in the dashboard header. */
+html[data-view=share] #home > :is(#home-devices, #home-settings, .launch-dashboard),
+html[data-view=connect] #home :is(#home-local, .ss-sharing-section, .ss-remote-intro),
+html[data-view=connect] #home-macs-section .ss-heading-label h2,
+html:is([data-view=share], [data-view=connect]) #home .ss-dashboard-title { display: none !important; }
+
+html[data-view=connect] #home-devices .ss-remote-group:has(> #home-macs-section:not([hidden])) { background: transparent; }
+html[data-view=connect] #home-devices .ss-remote-group #home-macs-section { padding-top: 0; }
+html[data-view=connect] #home-macs-list-slot { background: var(--settings-row); border-radius: 12px; overflow: hidden; }
+html[data-view=connect] #home-devices #home-refresh button {
+  display: inline-flex; align-items: center; gap: 5px; width: auto; height: auto; min-height: 28px;
+  font-size: 13px; text-transform: capitalize;
+}
+html[data-view=connect] #home-refresh button::before { transform: none; }
+html[data-view=connect] .ss-home #home-devices #home-add-device {
+  min-height: 28px; padding: 0; border: 0; background: transparent; color: var(--accent);
+  font-size: 13px; text-decoration: underline; text-underline-offset: 3px;
+}
+html[data-view=connect] .ss-home #home-devices #home-add-device:hover { background: transparent; color: var(--text); }
+#share { flex: 1; min-height: 0; overflow: auto; }
+.ss-home .share-content { display: block; max-width: 640px; padding: 24px 20px 32px; margin: 0 auto; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+.dashboard-detail-heading { display: none; align-items: center; gap: 12px; }
+html:is([data-view=share], [data-view=connect]) .dashboard-detail-heading { display: flex; }
+.dashboard-detail-heading h1 { margin: 0; font-size: 14px; font-weight: 600; color: var(--text); }
+#dashboard-detail-back { display: inline-flex; align-items: center; gap: 3px; min-height: 32px; padding: 0 8px 0 4px; border: 0; border-radius: 7px; background: transparent; color: var(--muted); font: inherit; cursor: pointer; }
+#dashboard-detail-back:hover { background: var(--surface); color: var(--text); }
+#dashboard-detail-back svg { width: 16px; height: 16px; }
+.sharing-help { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.sharing-section + .sharing-section { margin-top: 24px; }
+.sharing-section h2 { display: flex; align-items: center; gap: 10px; color: var(--text); font-size: 16px; font-weight: 600; }
+.sharing-number { display: grid; place-items: center; flex: 0 0 24px; height: 24px; border: 1px solid var(--border2); border-radius: 50%; background: var(--surface); font-size: 12px; }
+.sharing-section > .sharing-help { margin: 7px 0 10px; }
+.sharing-group { background: var(--settings-row, #302f30); border-radius: 12px; overflow: hidden; }
+.sharing-row { min-height: 62px; display: flex; align-items: center; gap: 12px; padding: 11px 14px; }
+.sharing-row > div { flex: 1; min-width: 0; }
+.sharing-row:not([hidden]) + .sharing-row { border-top: 1px solid var(--settings-separator, #ffffff0d); }
+.sharing-label { color: var(--text); font-size: 14px; font-weight: 600; line-height: 20px; }
+.sharing-row p { margin: 3px 0 0; color: var(--muted); font-size: 12px; line-height: 18px; }
+#share #status { margin: 0; font-size: 13px; }
+.ss-home #share button { flex-shrink: 0; min-height: 34px; padding: 5px 10px; border: 1px solid var(--border2); border-radius: 7px; background: var(--surface); box-shadow: none; font: 500 13px -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); cursor: pointer; }
+.ss-home #share button:hover { background: var(--surface2); }
+.ss-home #share button:disabled { opacity: .5; cursor: default; }
+.ss-home #share .sharing-primary { background: var(--text); border-color: transparent; color: var(--settings-canvas); }
+.ss-home #share .sharing-primary:hover { background: var(--muted); }
+#share-connection > .sharing-group { margin-top: 10px; }
+#share #qr { flex: 0 0 auto; padding: 6px; border-radius: 8px; align-self: auto; }
+#share #qr img { width: 88px; height: 88px; }
+#share code { display: block; border: 0; background: none; padding: 0; border-radius: 0; margin-top: 4px; font-size: 12px; line-height: 18px; }
+#share #connect-url { color: var(--muted); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+#share #published { margin-top: 8px; }
+.permission-allowed { color: var(--text); font-size: 12px; white-space: nowrap; }
+#share [hidden] { display: none; }
+
+/* The sign-in panel (`#e2e-setup`), the browser's own (`web/src/client/style.css` carries the same
+   rules for the session page): `data-tone` is the DECISION (`e2eSetupView`), and the identity is
+   SELECTABLE and never truncated — §10.1 asks a person to compare it against another device. */
+#e2e-setup[data-tone="warn"] h2 { color: var(--warn); }
+#e2e-setup[data-tone="ok"] h2 { color: var(--accent); }
+.e2e-setup-identity {
+  font-family: var(--font-mono, monospace); font-size: 11px; line-height: 1.5; word-break: break-all;
+  user-select: text; padding: 10px 12px; border: 1px solid var(--border);
+  border-radius: 9px; background: var(--surface2); color: var(--text);
+}
+.e2e-setup-actions { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
+
+#add-mac-help ol { margin: 0 0 14px; padding-left: 20px; color: var(--text); }
+#add-mac-help li + li { margin-top: 7px; }
+
+/* Launch uses the same dashboard window and tokens as Devices and Sharing. */
+.has-launch-dashboard > #home-devices,
+.has-launch-dashboard > #home-settings { display: none !important; }
+.launch-dashboard { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow: auto; padding: 30px 28px 22px; background: var(--settings-canvas); color: var(--text); }
+.launch-dashboard[hidden] { display: none; }
+.launch-heading h1 { font-size: 32px; line-height: 1.1; letter-spacing: -.045em; font-weight: 600; margin: 0 0 12px; }
+.launch-heading > p:last-child { color: var(--muted); font-size: 13px; margin: 0 0 26px; }
+.launch-actions { display: grid; gap: 10px; }
+.launch-actions button { display: grid; grid-template-columns: 30px 1fr 14px; gap: 12px; align-items: center; text-align: left; width: 100%; min-height: 83px; padding: 16px; border: 1px solid var(--border); border-radius: 12px; color: var(--text); background: var(--surface); cursor: pointer; }
+.launch-actions button:hover { background: var(--surface2); border-color: var(--border2); }
+.launch-actions strong { display: block; font-size: 15px; font-weight: 600; }
+.launch-actions small { display: block; font-size: 12px; line-height: 1.45; color: var(--muted); margin-top: 5px; }
+.launch-symbol { font-size: 24px; color: var(--muted); }
+.launch-error { color: var(--red); font-size: 12px; }
+
+.launch-symbol svg { display: block; width: 26px; height: 26px; }
+
+.launch-heading, .launch-actions { flex-shrink: 0; }
+
+.launch-heading { padding-top: 18px; }
+.launch-actions button { box-shadow: none; }

@@ -1,0 +1,10 @@
+{
+  "name": "Shellkite",
+  "product": "shellkite",
+  "bundleID": "ai.xpromptvs.shellkite",
+  "sourceBundleID": "com.xpromptvs.shellkite.development",
+  "clientURL": "https://shellkite.xpromptvs.com/app",
+  "serviceURL": "https://app.xpromptvs.ai",
+  "rpID": "xpromptvs.ai",
+  "updatesEnabled": false
+}

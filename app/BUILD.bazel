@@ -1,0 +1,75 @@
+load("@rules_swift//swift:swift.bzl", "swift_library", "swift_test")
+load("@rules_apple//apple:macos.bzl", "macos_application")
+
+config_setting(
+    name = "release",
+    values = {"compilation_mode": "opt"},
+)
+
+swift_library(
+    name = "ShellstormCore",
+    visibility = ["//visibility:public"],
+    srcs = glob(["Core/*.swift"]) + ["//config:native_app_distribution"],
+    module_name = "ShellstormCore",
+)
+
+swift_test(
+    name = "ShellstormCoreTests",
+    data = ["//protocol:fixtures"],
+    srcs = glob(["Tests/*.swift"]),
+    module_name = "ShellstormCoreTests",
+    deps = [":ShellstormCore"],
+)
+
+swift_library(
+    name = "ShellstormAppLib",
+    srcs = glob(["Sources/*.swift"]),
+    module_name = "ShellstormApp",
+    copts = select({
+        ":release": [],
+        "//conditions:default": ["-DRDEV_DEV_BUILD"],
+    }),
+    deps = [
+        ":ShellstormCore",
+        "//host/RdevAppHost:RdevAppHost",
+        "//host/RdevCore:RdevCore",
+        "//host/RdevHostKit:RdevHostKit",
+    ],
+)
+
+macos_application(
+    name = "Shellkite",
+    bundle_id = select({"//config:official": "ai.xpromptvs.shellkite", "//conditions:default": "com.xpromptvs.shellkite.development"}),
+    bundle_name = select({"//config:official": "Shellkite", "//conditions:default": "Shellkite Development"}),
+    codesignopts = ["--options=runtime"],
+    entitlements = select({"//config:official": "Shellkite-official.entitlements", "//conditions:default": ":source_entitlements"}),
+    entitlements_validation = "error",
+    infoplists = select({"//config:official": ["Info-official.plist"], "//conditions:default": ["Info.plist"]}),
+    provisioning_profile = select({"//config:official": "Shellkite.provisionprofile", "//conditions:default": None}),
+    minimum_os_version = "26.0",
+    tags = ["manual"],
+    deps = [":ShellstormAppLib"],
+)
+
+genrule(
+    name = "dev_entitlements",
+    srcs = ["Shellkite.entitlements"],
+    outs = ["Shellkite-dev.entitlements"],
+    cmd = "cp $< $@ && chmod u+w $@ && /usr/libexec/PlistBuddy -c \"Add :com.apple.security.get-task-allow bool true\" $@",
+)
+
+swift_test(
+    name = "ConnectAttemptsTests",
+    srcs = ["Sources/ConnectAttempts.swift", "ConnectionTests/ConnectAttemptsTests.swift"],
+    module_name = "ConnectAttemptsTests",
+    deps = [":ShellstormCore"],
+)
+
+swift_test(
+    name = "NativeSimulatorAppTests",
+    srcs = glob(["AppTests/*.swift"]) + ["Sources/SimulatorMetalView.swift", "Sources/SimulatorMetalRenderer.swift", "Sources/NativeSimulatorInput.swift", "Sources/NativeSourceScrollObserver.swift"],
+    module_name = "NativeSimulatorAppTests",
+    deps = [":ShellstormCore", "//host/RdevCore:RdevCore", "//host/RdevHostKit:RdevHostKit"],
+)
+
+alias(name = "source_entitlements", actual = select({":release": "Shellkite.entitlements", "//conditions:default": ":dev_entitlements"}))

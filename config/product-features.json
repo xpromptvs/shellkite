@@ -1,0 +1,12 @@
+{
+  "development": {
+    "graphicalAgents": false,
+    "glasses": false,
+    "desktopOnly": true
+  },
+  "publication": {
+    "graphicalAgents": false,
+    "glasses": false,
+    "desktopOnly": true
+  }
+}

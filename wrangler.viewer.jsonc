@@ -1,0 +1,8 @@
+{
+  "name": "shellkite-viewer",
+  "main": "deploy/viewer.mjs",
+  "compatibility_date": "2024-09-23",
+  "workers_dev": false,
+  "routes": [{ "pattern": "shellkite.xpromptvs.com", "custom_domain": true }],
+  "assets": { "directory": "web/dist", "binding": "ASSETS" }
+}
